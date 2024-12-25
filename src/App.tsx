@@ -1,5 +1,11 @@
+import CanvasPage from "./Pages/CanvasPage";
+
 function App() {
-	return <></>;
+	return (
+		<>
+			<CanvasPage />
+		</>
+	);
 }
 
 export default App;

@@ -1,0 +1,18 @@
+.basic-shape-container {
+	border-radius: 10px;
+	padding: 5px;
+	display: flex;
+	gap: 10px;
+	background-color: rgb(255, 255, 255);
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.basic-shape {
+	padding: 7px 12px;
+	/* background-color: rgb(238, 130, 238, 0.4); */
+	border-radius: 10px;
+}
+
+.basic-shape:first-child {
+	background-color: rgb(238, 130, 238, 0.4);
+}
