@@ -1,5 +1,5 @@
 import Canvas from "./Canvas";
-import TopBar from "./TopBar";
+import TopBar from "./Navbar";
 
 const CanvasPage = () => {
 	return (
