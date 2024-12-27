@@ -9,10 +9,14 @@
 
 .basic-shape {
 	padding: 7px 12px;
-	/* background-color: rgb(238, 130, 238, 0.4); */
 	border-radius: 10px;
+	transition: 0.1s;
 }
 
-.basic-shape:first-child {
+.basic-shape:hover {
+	background-color: rgb(0, 0, 0, 0.1);
+}
+
+.basic-shape.active {
 	background-color: rgb(238, 130, 238, 0.4);
 }
