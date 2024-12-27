@@ -1,15 +1,17 @@
-import { Layer, Rect, Stage } from "react-konva";
+import { Layer, Stage } from "react-konva";
+import { useSelector } from "react-redux";
 
 const Canvas = () => {
+	const shapesOnCanvas = useSelector((state) => state.paint);
+
+	console.log(shapesOnCanvas);
 	return (
 		<Stage
 			width={window.innerWidth}
 			height={600}
-			style={{ backgroundColor: "#faf7f0" }}>
-			<Layer>
-				<Rect fill={"blue"} height={100} width={100} x={50} y={50} />
-				<Rect fill={"red"} height={100} width={100} x={150} y={150} />
-			</Layer>
+			style={{ backgroundColor: "#faf7f0" }}
+			draggable>
+			<Layer></Layer>
 		</Stage>
 	);
 };
