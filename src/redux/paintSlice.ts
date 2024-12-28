@@ -22,7 +22,12 @@ export const paintSlice = createSlice({
 		appendShape: (state, action: PayloadAction<Shape>) => {
 			state.shapesOnCanvas.push(action.payload);
 		},
-		updateShape: (state, action) => {},
+		updateShape: (state, action: PayloadAction<Shape>) => {
+			const newShape = action.payload;
+			const index = state.shapesOnCanvas.findIndex((curShape) => curShape.id === newShape.id);
+
+			if (index >= 0) state.shapesOnCanvas[index] = newShape;
+		},
 	},
 });
 
