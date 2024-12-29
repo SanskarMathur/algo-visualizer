@@ -156,18 +156,19 @@ const Canvas = () => {
 			onMouseUp={handleMouseUp}
 			style={{ backgroundColor: "#faf7f0" }}>
 			<Layer>
-				{shapesOnCanvas.map((shape: Shape) => {
-					switch (shape.type) {
-						case BasicShapes.Rectangle:
-							return <BasicRectange key={shape.id} {...shape} />;
-						case BasicShapes.Circle:
-							return <BasicCircle key={shape.id} {...shape} />;
-						case BasicShapes.Line:
-							return <BasicLine key={shape.id} {...shape} />;
-						case BasicShapes.Arrow:
-							return <BasicArrow key={shape.id} {...shape} />;
-					}
-				})}
+				{shapesOnCanvas.length &&
+					shapesOnCanvas.map((shape: Shape) => {
+						switch (shape.type) {
+							case BasicShapes.Rectangle:
+								return <BasicRectange key={shape.id} {...shape} />;
+							case BasicShapes.Circle:
+								return <BasicCircle key={shape.id} {...shape} />;
+							case BasicShapes.Line:
+								return <BasicLine key={shape.id} {...shape} />;
+							case BasicShapes.Arrow:
+								return <BasicArrow key={shape.id} {...shape} />;
+						}
+					})}
 				{newShape &&
 					(() => {
 						switch (newShape.type) {
