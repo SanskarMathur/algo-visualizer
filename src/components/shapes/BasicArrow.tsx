@@ -1,7 +1,17 @@
 import { Arrow } from "react-konva";
+import Shape from "../Shape";
 
-const BasicArrow = () => {
-	return <Arrow stroke={"black"} points={[100, 100, 200, 200]} />;
+const BasicArrow = ({ stroke, strokeWidth, fill, isDraggable, rotation, properties }: Shape) => {
+	return (
+		<Arrow
+			stroke={stroke}
+			strokeWidth={strokeWidth}
+			rotation={rotation}
+			points={properties.points}
+			fill={fill}
+			draggable={isDraggable}
+		/>
+	);
 };
 
 export default BasicArrow;
