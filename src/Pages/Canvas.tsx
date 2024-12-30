@@ -2,17 +2,10 @@ import {useState} from "react";
 import {Layer, Stage} from "react-konva";
 import {useDispatch, useSelector} from "react-redux";
 import {v4 as uuidv4} from "uuid";
-import BasicShapes from "../components/BasicShapeEnum";
 import Shape from "../components/Shape";
-import BasicArrow from "../components/shapes/BasicArrow";
-import BasicCircle from "../components/shapes/BasicCircle";
-import BasicLine from "../components/shapes/BasicLine";
-import BasicRectange from "../components/shapes/BasicRectange";
+import ShapeFactory from "../components/ShapeFactory";
+import {createNewShape, updateShapeProperties} from "../components/ShapeUtils";
 import {appendShape} from "../redux/paintSlice";
-
-const calculateDist = (x1: number, y1: number, x2: number, y2: number) => {
-	return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5;
-};
 
 const Canvas = () => {
 	const tool = useSelector((state) => state.paint.tool);
@@ -30,79 +23,11 @@ const Canvas = () => {
 
 		setDragging(true);
 
-		let shape: Shape | null = null;
-
-		switch (tool) {
-			case BasicShapes.Rectangle:
-				shape = {
-					id: uuidv4(),
-					type: BasicShapes.Rectangle,
-					properties: {
-						x: pointerPosition.x,
-						y: pointerPosition.y,
-						width: 0,
-						height: 0,
-					},
-					stroke: "black",
-					strokeWidth: 2,
-					rotation: 0,
-					fill: "transparent",
-					isDraggable: false,
-				};
-				break;
-			case BasicShapes.Circle:
-				shape = {
-					id: uuidv4(),
-					type: BasicShapes.Circle,
-					properties: {
-						startX: pointerPosition.x,
-						startY: pointerPosition.y,
-						x: pointerPosition.x,
-						y: pointerPosition.y,
-						radius: 0,
-					},
-					stroke: "black",
-					strokeWidth: 2,
-					rotation: 0,
-					fill: "transparent",
-					isDraggable: false,
-				};
-				break;
-			case BasicShapes.Line:
-				shape = {
-					id: uuidv4(),
-					type: BasicShapes.Line,
-					properties: {
-						points: [pointerPosition.x, pointerPosition.y],
-					},
-					stroke: "black",
-					strokeWidth: 2,
-					rotation: 0,
-					fill: "transparent",
-					isDraggable: false,
-				};
-				break;
-			case BasicShapes.Arrow:
-				shape = {
-					id: uuidv4(),
-					type: BasicShapes.Arrow,
-					properties: {
-						points: [pointerPosition.x, pointerPosition.y],
-					},
-					stroke: "black",
-					strokeWidth: 2,
-					rotation: 0,
-					fill: "transparent",
-					isDraggable: false,
-				};
-				break;
-
-			default:
-				break;
-		}
+		const shape = createNewShape(tool, pointerPosition, uuidv4());
 
 		if (shape) setNewShape(shape);
 	};
+
 	const handleMouseMove = (e: any) => {
 		if (!isDragging || !newShape) return;
 
@@ -111,38 +36,7 @@ const Canvas = () => {
 
 		if (!pointerPosition) return;
 
-		const updatedShape = {...newShape};
-
-		switch (tool) {
-			case BasicShapes.Rectangle:
-				updatedShape.properties.width = pointerPosition.x - updatedShape.properties.x;
-				updatedShape.properties.height = pointerPosition.y - updatedShape.properties.y;
-				break;
-			case BasicShapes.Circle:
-				updatedShape.properties.x =
-					(updatedShape.properties.startX + pointerPosition.x) / 2;
-				updatedShape.properties.y =
-					(updatedShape.properties.startY + pointerPosition.y) / 2;
-				updatedShape.properties.radius =
-					calculateDist(
-						pointerPosition.x,
-						pointerPosition.y,
-						updatedShape.properties.startX,
-						updatedShape.properties.startY
-					) / 2;
-				break;
-			case BasicShapes.Line:
-			case BasicShapes.Arrow:
-				updatedShape.properties.points = [
-					newShape.properties.points[0],
-					newShape.properties.points[1],
-					pointerPosition.x,
-					pointerPosition.y,
-				];
-				break;
-			default:
-				break;
-		}
+		const updatedShape = updateShapeProperties(tool, newShape, pointerPosition);
 
 		setNewShape(updatedShape);
 	};
@@ -163,36 +57,8 @@ const Canvas = () => {
 			onMouseUp={handleMouseUp}
 			style={{backgroundColor: "#faf7f0"}}>
 			<Layer>
-				{shapesOnCanvas &&
-					shapesOnCanvas.map((shape: Shape) => {
-						switch (shape.type) {
-							case BasicShapes.Rectangle:
-								return <BasicRectange key={shape.id} {...shape} />;
-							case BasicShapes.Circle:
-								return <BasicCircle key={shape.id} {...shape} />;
-							case BasicShapes.Line:
-								return <BasicLine key={shape.id} {...shape} />;
-							case BasicShapes.Arrow:
-								return <BasicArrow key={shape.id} {...shape} />;
-							default:
-								return null;
-						}
-					})}
-				{newShape &&
-					(() => {
-						switch (newShape.type) {
-							case BasicShapes.Rectangle:
-								return <BasicRectange key={newShape.id} {...newShape} />;
-							case BasicShapes.Circle:
-								return <BasicCircle key={newShape.id} {...newShape} />;
-							case BasicShapes.Line:
-								return <BasicLine key={newShape.id} {...newShape} />;
-							case BasicShapes.Arrow:
-								return <BasicArrow key={newShape.id} {...newShape} />;
-							default:
-								return null;
-						}
-					})()}
+				{shapesOnCanvas && <ShapeFactory shapes={shapesOnCanvas} />}
+				{newShape && <ShapeFactory shapes={[newShape]} />}
 			</Layer>
 		</Stage>
 	);
