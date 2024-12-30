@@ -28,8 +28,14 @@ export const paintSlice = createSlice({
 
 			if (index >= 0) state.shapesOnCanvas[index] = newShape;
 		},
+		removeShape: (state, action: PayloadAction<string>) => {
+			const shapeIDToRemove = action.payload;
+			state.shapesOnCanvas = state.shapesOnCanvas.filter(
+				(shape) => shape.id !== shapeIDToRemove
+			);
+		},
 	},
 });
 
-export const { changeTool, appendShape, updateShape } = paintSlice.actions;
+export const {changeTool, appendShape, updateShape, removeShape} = paintSlice.actions;
 export default paintSlice.reducer;
