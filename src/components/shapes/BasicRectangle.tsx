@@ -1,7 +1,7 @@
-import { Rect } from "react-konva";
+import {Rect} from "react-konva";
 import Shape from "../Shape";
 
-const BasicRectange = ({ stroke, strokeWidth, fill, isDraggable, rotation, properties }: Shape) => {
+const BasicRectange = ({stroke, strokeWidth, fill, isDraggable, rotation, properties}: Shape) => {
 	return (
 		<Rect
 			stroke={stroke}
