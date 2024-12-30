@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { Layer, Stage } from "react-konva";
-import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+import {useState} from "react";
+import {Layer, Stage} from "react-konva";
+import {useDispatch, useSelector} from "react-redux";
+import {v4 as uuidv4} from "uuid";
 import BasicShapes from "../components/BasicShapeEnum";
 import Shape from "../components/Shape";
 import BasicArrow from "../components/shapes/BasicArrow";
 import BasicCircle from "../components/shapes/BasicCircle";
 import BasicLine from "../components/shapes/BasicLine";
 import BasicRectange from "../components/shapes/BasicRectange";
-import { appendShape } from "../redux/paintSlice";
+import {appendShape} from "../redux/paintSlice";
 
 const calculateDist = (x1: number, y1: number, x2: number, y2: number) => {
 	return ((x1 - x2) ** 2 + (y1 - y2) ** 2) ** 0.5;
@@ -55,6 +55,8 @@ const Canvas = () => {
 					id: uuidv4(),
 					type: BasicShapes.Circle,
 					properties: {
+						startX: pointerPosition.x,
+						startY: pointerPosition.y,
 						x: pointerPosition.x,
 						y: pointerPosition.y,
 						radius: 0,
@@ -109,7 +111,7 @@ const Canvas = () => {
 
 		if (!pointerPosition) return;
 
-		const updatedShape = { ...newShape };
+		const updatedShape = {...newShape};
 
 		switch (tool) {
 			case BasicShapes.Rectangle:
@@ -117,12 +119,17 @@ const Canvas = () => {
 				updatedShape.properties.height = pointerPosition.y - updatedShape.properties.y;
 				break;
 			case BasicShapes.Circle:
-				updatedShape.properties.radius = calculateDist(
-					pointerPosition.x,
-					pointerPosition.y,
-					updatedShape.properties.x,
-					updatedShape.properties.y
-				);
+				updatedShape.properties.x =
+					(updatedShape.properties.startX + pointerPosition.x) / 2;
+				updatedShape.properties.y =
+					(updatedShape.properties.startY + pointerPosition.y) / 2;
+				updatedShape.properties.radius =
+					calculateDist(
+						pointerPosition.x,
+						pointerPosition.y,
+						updatedShape.properties.startX,
+						updatedShape.properties.startY
+					) / 2;
 				break;
 			case BasicShapes.Line:
 			case BasicShapes.Arrow:
@@ -154,9 +161,9 @@ const Canvas = () => {
 			onMouseDown={handleMouseDown}
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
-			style={{ backgroundColor: "#faf7f0" }}>
+			style={{backgroundColor: "#faf7f0"}}>
 			<Layer>
-				{shapesOnCanvas.length &&
+				{shapesOnCanvas &&
 					shapesOnCanvas.map((shape: Shape) => {
 						switch (shape.type) {
 							case BasicShapes.Rectangle:
@@ -167,6 +174,8 @@ const Canvas = () => {
 								return <BasicLine key={shape.id} {...shape} />;
 							case BasicShapes.Arrow:
 								return <BasicArrow key={shape.id} {...shape} />;
+							default:
+								return null;
 						}
 					})}
 				{newShape &&
@@ -180,8 +189,10 @@ const Canvas = () => {
 								return <BasicLine key={newShape.id} {...newShape} />;
 							case BasicShapes.Arrow:
 								return <BasicArrow key={newShape.id} {...newShape} />;
+							default:
+								return null;
 						}
-					})}
+					})()}
 			</Layer>
 		</Stage>
 	);
