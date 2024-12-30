@@ -15,6 +15,7 @@ const ShapeFactory = ({shapes}: {shapes: Shape[]}) => {
 					case BasicShapes.Circle:
 						return <BasicCircle key={shape.id} {...shape} />;
 					case BasicShapes.Line:
+					case BasicShapes.Scribble:
 						return <BasicLine key={shape.id} {...shape} />;
 					case BasicShapes.Arrow:
 						return <BasicArrow key={shape.id} {...shape} />;

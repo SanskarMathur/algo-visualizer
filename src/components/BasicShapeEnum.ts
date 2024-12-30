@@ -4,6 +4,7 @@ enum BasicShapes {
 	Circle = "Circle",
 	Line = "Line",
 	Rectangle = "Rectangle",
+	Scribble = "Scribble",
 	Eraser = "Eraser",
 	More = "More",
 }
