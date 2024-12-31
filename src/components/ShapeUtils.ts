@@ -1,60 +1,49 @@
 import BasicShapes from "../components/BasicShapeEnum";
-import {calculateDist} from "./Geometry";
+import { calculateDist } from "./Geometry";
 import Shape from "./Shape";
 
 export const createNewShape = (tool: string, pointerPosition: any, id: string) => {
+	let shapeObj = {
+		id,
+		type: tool,
+		properties: {},
+		stroke: "black",
+		strokeWidth: 4,
+		rotation: 0,
+		fill: "transparent",
+		isDraggable: false,
+	};
+	
 	switch (tool) {
 		case BasicShapes.Rectangle:
-			return {
-				id,
-				type: BasicShapes.Rectangle,
-				properties: {
-					x: pointerPosition.x,
-					y: pointerPosition.y,
-					width: 0,
-					height: 0,
-				},
-				stroke: "black",
-				strokeWidth: 2,
-				rotation: 0,
-				fill: "transparent",
-				isDraggable: false,
+			shapeObj.properties = {
+				x: pointerPosition.x,
+				y: pointerPosition.y,
+				width: 0,
+				height: 0,
 			};
+			break;
 		case BasicShapes.Circle:
-			return {
-				id,
-				type: BasicShapes.Circle,
-				properties: {
-					startX: pointerPosition.x,
-					startY: pointerPosition.y,
-					x: pointerPosition.x,
-					y: pointerPosition.y,
-					radius: 0,
-				},
-				stroke: "black",
-				strokeWidth: 2,
-				rotation: 0,
-				fill: "transparent",
-				isDraggable: false,
+			shapeObj.properties = {
+				startX: pointerPosition.x,
+				startY: pointerPosition.y,
+				x: pointerPosition.x,
+				y: pointerPosition.y,
+				radius: 0,
 			};
+			break;
 		case BasicShapes.Line:
 		case BasicShapes.Arrow:
 		case BasicShapes.Scribble:
-			return {
-				id,
-				type: tool,
-				properties: {
-					points: [pointerPosition.x, pointerPosition.y],
-				},
-				stroke: "black",
-				strokeWidth: 2,
-				rotation: 0,
-				fill: "transparent",
-				isDraggable: false,
+			shapeObj.properties = {
+				points: [pointerPosition.x, pointerPosition.y],
 			};
+			break;
 		default:
-			return null;
+			shapeObj = null;
 	}
+
+	return shapeObj;
 };
 
 export const updateShapeProperties = (tool: string, shape: Shape, pointerPosition: any) => {
