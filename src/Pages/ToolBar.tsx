@@ -12,9 +12,9 @@ import {
 	ZoomIn,
 	ZoomOut,
 } from "react-bootstrap-icons";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import BasicShapes from "../components/BasicShapeEnum";
-import {changeTool, PaintState, redo, undo} from "../redux/paintSlice";
+import { changeTool, PaintState, redo, undo } from "../redux/paintSlice";
 import "./ToolBar.css";
 
 const ToolBar = () => {
@@ -26,7 +26,7 @@ const ToolBar = () => {
 	};
 
 	return (
-		<div style={{display: "flex", gap: "20px"}}>
+		<div className="toolbar">
 			<div className="basic-shape-container">
 				<div className="basic-shape" onClick={() => dispatch(undo())}>
 					<ArrowCounterclockwise />

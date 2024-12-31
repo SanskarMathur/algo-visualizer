@@ -1,11 +1,11 @@
-import {useState} from "react";
-import {Layer, Stage} from "react-konva";
-import {useDispatch, useSelector} from "react-redux";
-import {v4 as uuidv4} from "uuid";
+import { useState } from "react";
+import { Layer, Stage } from "react-konva";
+import { useDispatch, useSelector } from "react-redux";
+import { v4 as uuidv4 } from "uuid";
 import Shape from "../components/Shape";
 import ShapeFactory from "../components/ShapeFactory";
-import {createNewShape, updateShapeProperties} from "../components/ShapeUtils";
-import {appendShape} from "../redux/paintSlice";
+import { createNewShape, updateShapeProperties } from "../components/ShapeUtils";
+import { appendShape } from "../redux/paintSlice";
 
 const Canvas = () => {
 	const tool = useSelector((state) => state.paint.tool);
@@ -40,6 +40,7 @@ const Canvas = () => {
 
 		setNewShape(updatedShape);
 	};
+
 	const handleMouseUp = (e: any) => {
 		if (newShape) {
 			dispatch(appendShape(newShape));
@@ -51,11 +52,11 @@ const Canvas = () => {
 	return (
 		<Stage
 			width={window.innerWidth}
-			height={window.innerHeight - 60}
+			height={window.innerHeight}
 			onMouseDown={handleMouseDown}
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
-			style={{backgroundColor: "#faf7f0"}}>
+			style={{ backgroundColor: "#faf7f0" }}>
 			<Layer>
 				{shapesOnCanvas && <ShapeFactory shapes={shapesOnCanvas} />}
 				{newShape && <ShapeFactory shapes={[newShape]} />}

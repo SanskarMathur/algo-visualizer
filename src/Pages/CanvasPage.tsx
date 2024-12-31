@@ -1,10 +1,10 @@
 import Canvas from "./Canvas";
-import TopBar from "./Navbar";
+import ToolBar from "./ToolBar";
 
 const CanvasPage = () => {
 	return (
 		<div>
-			<TopBar />
+			<ToolBar />
 			<Canvas />
 		</div>
 	);

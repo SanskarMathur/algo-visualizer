@@ -1,3 +1,13 @@
+.toolbar {
+	display: flex;
+	gap: 20px;
+	position: absolute;
+	top: 10px;
+	left: 50%;
+	translate: -50%;
+	z-index: 1;
+}
+
 .basic-shape-container {
 	border-radius: 10px;
 	padding: 5px;
