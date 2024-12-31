@@ -1,5 +1,5 @@
 import BasicShapes from "../components/BasicShapeEnum";
-import { calculateDist } from "./Geometry";
+import {calculateDist} from "./Geometry";
 import Shape from "./Shape";
 
 export const createNewShape = (tool: string, pointerPosition: any, id: string) => {
@@ -13,7 +13,7 @@ export const createNewShape = (tool: string, pointerPosition: any, id: string) =
 		fill: "transparent",
 		isDraggable: false,
 	};
-	
+
 	switch (tool) {
 		case BasicShapes.Rectangle:
 			shapeObj.properties = {
@@ -39,6 +39,13 @@ export const createNewShape = (tool: string, pointerPosition: any, id: string) =
 				points: [pointerPosition.x, pointerPosition.y],
 			};
 			break;
+		case BasicShapes.Eraser:
+			shapeObj.strokeWidth = 20;
+			shapeObj.properties = {
+				points: [pointerPosition.x, pointerPosition.y],
+			};
+			break;
+
 		default:
 			shapeObj = null;
 	}
@@ -74,6 +81,7 @@ export const updateShapeProperties = (tool: string, shape: Shape, pointerPositio
 				pointerPosition.y,
 			];
 			break;
+		case BasicShapes.Eraser:
 		case BasicShapes.Scribble:
 			updatedShape.properties.points = [
 				...shape.properties.points,
