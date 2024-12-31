@@ -10,6 +10,7 @@ const BasicArrow = ({ stroke, strokeWidth, fill, isDraggable, rotation, properti
 			points={properties.points}
 			fill={fill}
 			draggable={isDraggable}
+			pointerLength={10}
 		/>
 	);
 };
