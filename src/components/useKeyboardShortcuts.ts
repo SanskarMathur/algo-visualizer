@@ -5,7 +5,7 @@ const SecondaryKeys = ["ctrl", "shift", "alt", "meta"];
 const useKeyboardShortcuts = (shortcuts: string, callback, isShortcutActive = true) => {
 	useEffect(() => {
 		if (!isShortcutActive) return;
-		
+
 		const handleKeyDown = (event) => {
 			const keys = shortcuts.split("+").map((key) => key.toLowerCase());
 
@@ -33,7 +33,7 @@ const useKeyboardShortcuts = (shortcuts: string, callback, isShortcutActive = tr
 
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [shortcuts, callback]);
+	}, [shortcuts, callback, isShortcutActive]);
 };
 
 export default useKeyboardShortcuts;

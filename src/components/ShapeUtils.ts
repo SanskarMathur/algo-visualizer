@@ -1,5 +1,5 @@
 import BasicShapes from "../components/BasicShapeEnum";
-import {calculateDist} from "./Geometry";
+import { calculateDist } from "./Geometry";
 import Shape from "./Shape";
 
 export const createNewShape = (tool: string, pointerPosition: any, id: string) => {
@@ -54,7 +54,7 @@ export const createNewShape = (tool: string, pointerPosition: any, id: string) =
 };
 
 export const updateShapeProperties = (tool: string, shape: Shape, pointerPosition: any) => {
-	const updatedShape = {...shape};
+	const updatedShape = { ...shape };
 
 	switch (tool) {
 		case BasicShapes.Rectangle:
