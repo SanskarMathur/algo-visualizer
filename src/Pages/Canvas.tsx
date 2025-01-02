@@ -41,7 +41,7 @@ const Canvas = () => {
 		setNewShape(updatedShape);
 	};
 
-	const handleMouseUp = (e: any) => {
+	const handleMouseUp = () => {
 		if (newShape) {
 			dispatch(appendShape(newShape));
 			setNewShape(null);
