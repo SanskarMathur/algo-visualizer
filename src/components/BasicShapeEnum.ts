@@ -1,4 +1,5 @@
 enum BasicShapes {
+	Move = "Move",
 	Selection = "Selection",
 	Arrow = "Arrow",
 	Circle = "Circle",

@@ -1,6 +1,7 @@
 import {
 	ArrowClockwise,
 	ArrowCounterclockwise,
+	ArrowsMove,
 	ArrowUpRight,
 	Circle,
 	Eraser,
@@ -12,9 +13,9 @@ import {
 	ZoomIn,
 	ZoomOut,
 } from "react-bootstrap-icons";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import BasicShapes from "../components/BasicShapeEnum";
-import { changeTool, PaintState, redo, undo } from "../redux/paintSlice";
+import {changeTool, PaintState, redo, undo} from "../redux/paintSlice";
 import "./ToolBar.css";
 
 const ToolBar = () => {
@@ -36,6 +37,11 @@ const ToolBar = () => {
 				</div>
 			</div>
 			<div className="basic-shape-container">
+				<div
+					className={`basic-shape ${activeTool === BasicShapes.Move ? "active" : ""}`}
+					onClick={() => changeToolHelper(BasicShapes.Move)}>
+					<ArrowsMove />
+				</div>
 				<div
 					className={`basic-shape ${
 						activeTool === BasicShapes.Selection ? "active" : ""

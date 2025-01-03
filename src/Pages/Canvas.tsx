@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { Layer, Stage } from "react-konva";
-import { useDispatch, useSelector } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+import {useState} from "react";
+import {Layer, Stage} from "react-konva";
+import {useDispatch, useSelector} from "react-redux";
+import {v4 as uuidv4} from "uuid";
+import BasicShapes from "../components/BasicShapeEnum";
 import Shape from "../components/Shape";
 import ShapeFactory from "../components/ShapeFactory";
-import { createNewShape, updateShapeProperties } from "../components/ShapeUtils";
-import { appendShape } from "../redux/paintSlice";
+import {createNewShape, updateShapeProperties} from "../components/ShapeUtils";
+import {appendShape} from "../redux/paintSlice";
 
 const Canvas = () => {
 	const tool = useSelector((state) => state.paint.tool);
@@ -56,7 +57,8 @@ const Canvas = () => {
 			onMouseDown={handleMouseDown}
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
-			style={{ backgroundColor: "#faf7f0" }}>
+			draggable={tool === BasicShapes.Move}
+			style={{backgroundColor: "#faf7f0"}}>
 			<Layer>
 				{shapesOnCanvas && <ShapeFactory shapes={shapesOnCanvas} />}
 				{newShape && <ShapeFactory shapes={[newShape]} />}
