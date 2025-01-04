@@ -4,6 +4,7 @@ import useKeyboardShortcuts from "../components/useKeyboardShortcuts";
 import { changeTool, redo, undo } from "../redux/paintSlice";
 import Canvas from "./Canvas";
 import ToolBar from "./ToolBar";
+import { changeZoom } from "../redux/canvasSlice";
 
 const CanvasPage = () => {
 	const dispatch = useDispatch();
@@ -21,6 +22,10 @@ const CanvasPage = () => {
 	// Undo/Redo shortcuts
 	useKeyboardShortcuts("ctrl+z", () => dispatch(undo()));
 	useKeyboardShortcuts("ctrl+y", () => dispatch(redo()));
+
+	// Zoom shortcuts
+	useKeyboardShortcuts("ctrl+=", () => dispatch(changeZoom("in")));
+	useKeyboardShortcuts("ctrl+-", () => dispatch(changeZoom("out")));
 	return (
 		<div>
 			<ToolBar />
