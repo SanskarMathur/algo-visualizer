@@ -13,6 +13,7 @@ const Canvas = () => {
 	const tool = useSelector((state) => state.paint.tool);
 	const shapesOnCanvas = useSelector((state) => state.paint.shapesOnCanvas);
 	const canvasPosition = useSelector((state) => state.canvas.position);
+	const canvasScale = useSelector((state) => state.canvas.scale);
 	const dispatch = useDispatch();
 
 	const [newShape, setNewShape] = useState<Shape | null>(null);
@@ -27,8 +28,8 @@ const Canvas = () => {
 		setDragging(true);
 
 		pointerPosition = {
-			x: pointerPosition.x - canvasPosition.x,
-			y: pointerPosition.y - canvasPosition.y,
+			x: (pointerPosition.x - canvasPosition.x) / canvasScale,
+			y: (pointerPosition.y - canvasPosition.y) / canvasScale,
 		};
 		const shape = createNewShape(tool, pointerPosition, uuidv4());
 
@@ -44,8 +45,8 @@ const Canvas = () => {
 		if (!pointerPosition) return;
 
 		pointerPosition = {
-			x: pointerPosition.x - canvasPosition.x,
-			y: pointerPosition.y - canvasPosition.y,
+			x: (pointerPosition.x - canvasPosition.x) / canvasScale,
+			y: (pointerPosition.y - canvasPosition.y) / canvasScale,
 		};
 
 		const updatedShape = updateShapeProperties(tool, newShape, pointerPosition);
@@ -81,6 +82,7 @@ const Canvas = () => {
 			onMouseMove={handleMouseMove}
 			onMouseUp={handleMouseUp}
 			draggable={tool === BasicShapes.Move}
+			scale={{ x: canvasScale, y: canvasScale }}
 			onDragEnd={handleCanvasDragEnd}
 			style={{ backgroundColor: "#faf7f0" }}>
 			<Layer>

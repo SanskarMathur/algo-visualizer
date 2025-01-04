@@ -15,11 +15,12 @@ import {
 } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import BasicShapes from "../components/BasicShapeEnum";
+import { changeZoom, resetZoom } from "../redux/canvasSlice";
 import { changeTool, PaintState, redo, undo } from "../redux/paintSlice";
 import "./ToolBar.css";
 
 const ToolBar = () => {
-	const activeTool = useSelector((state: PaintState) => state.paint.tool);
+	const activeTool = useSelector((state: PaintState) => state.paint.tool || BasicShapes.Move);
 	const canvasScale = useSelector((state: CanvasState) => state.canvas.scale);
 	const dispatch = useDispatch();
 
@@ -89,11 +90,13 @@ const ToolBar = () => {
 				</div>
 			</div>
 			<div className="basic-shape-container right">
-				<div className="basic-shape">
+				<div className="basic-shape" onClick={() => dispatch(changeZoom("out"))}>
 					<ZoomOut />
 				</div>
-				<div className="basic-shape">{canvasScale * 100} %</div>
-				<div className="basic-shape">
+				<div className="basic-shape" onClick={() => dispatch(resetZoom())}>
+					{Math.round(canvasScale * 100)} %
+				</div>
+				<div className="basic-shape" onClick={() => dispatch(changeZoom("in"))}>
 					<ZoomIn />
 				</div>
 			</div>
