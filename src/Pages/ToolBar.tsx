@@ -28,8 +28,8 @@ const ToolBar = () => {
 	};
 
 	return (
-		<div className="toolbar">
-			<div className="basic-shape-container">
+		<>
+			<div className="basic-shape-container left">
 				<div className="basic-shape" onClick={() => dispatch(undo())}>
 					<ArrowCounterclockwise />
 				</div>
@@ -37,7 +37,7 @@ const ToolBar = () => {
 					<ArrowClockwise />
 				</div>
 			</div>
-			<div className="basic-shape-container">
+			<div className="basic-shape-container middle">
 				<div
 					className={`basic-shape ${activeTool === BasicShapes.Move ? "active" : ""}`}
 					onClick={() => changeToolHelper(BasicShapes.Move)}>
@@ -88,7 +88,7 @@ const ToolBar = () => {
 					<PlusCircle />
 				</div>
 			</div>
-			<div className="basic-shape-container">
+			<div className="basic-shape-container right">
 				<div className="basic-shape">
 					<ZoomOut />
 				</div>
@@ -97,7 +97,7 @@ const ToolBar = () => {
 					<ZoomIn />
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
