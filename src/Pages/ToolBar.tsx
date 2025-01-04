@@ -83,9 +83,7 @@ const ToolBar = () => {
 					onClick={() => changeToolHelper(BasicShapes.Eraser)}>
 					<Eraser />
 				</div>
-				<div
-					className={`basic-shape ${activeTool === BasicShapes.More ? "active" : ""}`}
-					onClick={() => changeToolHelper(BasicShapes.More)}>
+				<div className={`basic-shape`}>
 					<PlusCircle />
 				</div>
 			</div>
