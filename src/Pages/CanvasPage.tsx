@@ -1,10 +1,11 @@
 import { useDispatch } from "react-redux";
 import BasicShapes from "../components/BasicShapeEnum";
+import LeftPane from "../components/LeftPane";
 import useKeyboardShortcuts from "../components/useKeyboardShortcuts";
+import { changeZoom } from "../redux/canvasSlice";
 import { changeTool, redo, undo } from "../redux/paintSlice";
 import Canvas from "./Canvas";
 import ToolBar from "./ToolBar";
-import { changeZoom } from "../redux/canvasSlice";
 
 const CanvasPage = () => {
 	const dispatch = useDispatch();
@@ -27,10 +28,11 @@ const CanvasPage = () => {
 	useKeyboardShortcuts("ctrl+=", () => dispatch(changeZoom("in")));
 	useKeyboardShortcuts("ctrl+-", () => dispatch(changeZoom("out")));
 	return (
-		<div>
+		<>
+			<LeftPane />
 			<ToolBar />
 			<Canvas />
-		</div>
+		</>
 	);
 };
 

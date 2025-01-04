@@ -1,0 +1,20 @@
+.leftPane-container {
+	position: absolute;
+	overflow: hidden;
+	top: 2%;
+	height: 81%;
+	z-index: 1;
+	border-radius: 0px 15px 15px 0px;
+	width: 30%;
+	background-color: white;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	padding: 20px;
+}
+
+.leftPane {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+	overflow: auto;
+}
