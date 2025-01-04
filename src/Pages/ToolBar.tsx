@@ -20,6 +20,7 @@ import "./ToolBar.css";
 
 const ToolBar = () => {
 	const activeTool = useSelector((state: PaintState) => state.paint.tool);
+	const canvasScale = useSelector((state: CanvasState) => state.canvas.scale);
 	const dispatch = useDispatch();
 
 	const changeToolHelper = (newTool: BasicShapes) => {
@@ -89,10 +90,11 @@ const ToolBar = () => {
 			</div>
 			<div className="basic-shape-container">
 				<div className="basic-shape">
-					<ZoomIn />
-				</div>
-				<div className="basic-shape">
 					<ZoomOut />
+				</div>
+				<div className="basic-shape">{canvasScale * 100} %</div>
+				<div className="basic-shape">
+					<ZoomIn />
 				</div>
 			</div>
 		</div>
