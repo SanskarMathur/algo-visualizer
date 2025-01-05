@@ -2,14 +2,16 @@
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	top: 2%;
+	top: 0;
 	height: 81%;
 	z-index: 1;
-	border-radius: 0px 15px 15px 0px;
+	border-radius: 0px 0px 15px 0px;
 	width: 30%;
 	background-color: white;
 	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 	padding: 20px;
+	transition: 1s;
+	translate: translateX(0);
 }
 
 .list-icon-opened {
@@ -30,4 +32,16 @@
 	justify-content: space-between;
 	height: 90%;
 	overflow: auto;
+}
+
+.input-label {
+	font-size: 15px;
+	color: black;
+}
+
+.input-text {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 10px;
+	outline: none;
 }
