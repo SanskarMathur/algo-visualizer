@@ -1,13 +1,16 @@
-import { useDispatch } from "react-redux";
+import { List } from "react-bootstrap-icons";
+import { useDispatch, useSelector } from "react-redux";
 import BasicShapes from "../components/BasicShapeEnum";
 import LeftPane from "../components/LeftPane";
 import useKeyboardShortcuts from "../components/useKeyboardShortcuts";
-import { changeZoom } from "../redux/canvasSlice";
+import { changeZoom, toggleLeftPane } from "../redux/canvasSlice";
 import { changeTool, redo, undo } from "../redux/paintSlice";
 import Canvas from "./Canvas";
+import "./CanvasPage.css";
 import ToolBar from "./ToolBar";
 
 const CanvasPage = () => {
+	const leftPaneOpen = useSelector((state) => state.canvas.leftPaneOpen);
 	const dispatch = useDispatch();
 
 	// Tool selection shortcuts
@@ -29,7 +32,11 @@ const CanvasPage = () => {
 	useKeyboardShortcuts("ctrl+-", () => dispatch(changeZoom("out")));
 	return (
 		<>
-			<LeftPane />
+			{leftPaneOpen ? (
+				<LeftPane />
+			) : (
+				<List className="list-icon-closed" onClick={() => dispatch(toggleLeftPane())} />
+			)}
 			<ToolBar />
 			<Canvas />
 		</>

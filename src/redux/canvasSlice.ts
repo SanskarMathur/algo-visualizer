@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export interface CanvasState {
 	position: { x: number; y: number };
 	scale: number;
+	leftPaneOpen: boolean;
 }
 
 const initialState = {
 	position: { x: 0, y: 0 },
 	scale: 1,
+	leftPaneOpen: false,
 };
 
 export const canvasSlice = createSlice({
@@ -25,12 +27,14 @@ export const canvasSlice = createSlice({
 			else if (action.payload === "in" && state.scale < maxScale)
 				state.scale = Math.min(maxScale, state.scale + 0.1);
 		},
-
 		resetZoom: (state) => {
 			state.scale = 1;
+		},
+		toggleLeftPane: (state) => {
+			state.leftPaneOpen = !state.leftPaneOpen;
 		},
 	},
 });
 
-export const { changePosition, changeZoom, resetZoom } = canvasSlice.actions;
+export const { changePosition, changeZoom, resetZoom, toggleLeftPane } = canvasSlice.actions;
 export default canvasSlice.reducer;

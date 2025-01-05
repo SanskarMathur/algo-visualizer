@@ -1,0 +1,14 @@
+.list-icon-closed {
+	position: absolute;
+	cursor: pointer;
+	padding: 10px 10px;
+	border-radius: 10px;
+	transition: 0.1s;
+	z-index: 1;
+	top: 10px;
+	left: 10px;
+}
+
+.list-icon-closed:hover {
+	background-color: rgb(0, 0, 0, 0.1);
+}
