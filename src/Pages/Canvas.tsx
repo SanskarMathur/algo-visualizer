@@ -75,15 +75,8 @@ const Canvas = () => {
 		setNewShape(updatedShape);
 	};
 
-	const handleMouseUp = () => {
-		if (newShape) {
-			dispatch(appendShape(newShape));
-			setNewShape(null);
-		}
-		setDragging(false);
-	};
-
-	const handleCanvasDragEnd = (e) => {
+	const handleMouseUp = (e: any) => {
+		// If the tool is Move, we need to update the canvas position
 		if (tool === BasicShapes.Move) {
 			const stage = e.target.getStage();
 			dispatch(
@@ -92,7 +85,15 @@ const Canvas = () => {
 					y: stage.y(),
 				})
 			);
+			return;
 		}
+
+		// Else it's a shape, so we need to append the new shape to the shapesOnCanvas state
+		if (newShape) {
+			dispatch(appendShape(newShape));
+			setNewShape(null);
+		}
+		setDragging(false);
 	};
 
 	return (
@@ -104,7 +105,7 @@ const Canvas = () => {
 			onMouseUp={handleMouseUp}
 			draggable={tool === BasicShapes.Move}
 			scale={{ x: canvasScale, y: canvasScale }}
-			onDragEnd={handleCanvasDragEnd}
+			onDragEnd={handleMouseUp}
 			style={{ backgroundColor: "#faf7f0" }}>
 			<Layer>
 				{shapesOnCanvas && <ShapeFactory shapes={shapesOnCanvas} />}
