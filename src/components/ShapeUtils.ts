@@ -65,11 +65,9 @@ export const updateShapeProperties = (tool: string, shape: Shape, pointerPositio
 			updatedShape.properties.x = (updatedShape.properties.startX + pointerPosition.x) / 2;
 			updatedShape.properties.y = (updatedShape.properties.startY + pointerPosition.y) / 2;
 			updatedShape.properties.radius =
-				calculateDist(
-					pointerPosition.x,
-					pointerPosition.y,
-					updatedShape.properties.startX,
-					updatedShape.properties.startY
+				Math.max(
+					Math.abs(pointerPosition.x - updatedShape.properties.startX),
+					Math.abs(pointerPosition.y - updatedShape.properties.startY)
 				) / 2;
 			break;
 		case BasicShapes.Line:
