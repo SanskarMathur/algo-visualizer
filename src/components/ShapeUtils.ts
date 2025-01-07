@@ -1,5 +1,4 @@
-import BasicShapes from "../components/BasicShapeEnum";
-import { calculateDist } from "./Geometry";
+import { BasicShapes } from "./ShapeEnum";
 import Shape from "./Shape";
 
 export const createNewShape = (tool: string, pointerPosition: any, id: string) => {

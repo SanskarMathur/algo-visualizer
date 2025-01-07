@@ -1,6 +1,6 @@
 import { List } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import BasicShapes from "../components/BasicShapeEnum";
+import { BasicShapes } from "../components/ShapeEnum";
 import LeftPane from "../components/LeftPane";
 import useKeyboardShortcuts from "../components/useKeyboardShortcuts";
 import { changeZoom, toggleLeftPane } from "../redux/canvasSlice";

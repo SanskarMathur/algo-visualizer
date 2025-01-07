@@ -1,5 +1,5 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import BasicShapes from "../components/BasicShapeEnum";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { BasicShapes } from "../components/ShapeEnum";
 import Shape from "../components/Shape";
 
 export interface PaintState {
@@ -61,5 +61,5 @@ export const paintSlice = createSlice({
 	},
 });
 
-export const {changeTool, appendShape, updateShape, removeShape, undo, redo} = paintSlice.actions;
+export const { changeTool, appendShape, updateShape, removeShape, undo, redo } = paintSlice.actions;
 export default paintSlice.reducer;

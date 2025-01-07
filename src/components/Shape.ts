@@ -1,4 +1,4 @@
-import BasicShapes from "./BasicShapeEnum";
+import { BasicShapes } from "./ShapeEnum";
 
 export default interface Shape {
 	id: string; // UUID

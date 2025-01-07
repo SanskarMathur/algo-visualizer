@@ -1,4 +1,4 @@
-import BasicShapes from "./BasicShapeEnum";
+import { BasicShapes } from "./ShapeEnum";
 import Shape from "./Shape";
 import BasicArrow from "./shapes/BasicArrow";
 import BasicCircle from "./shapes/BasicCircle";
@@ -6,7 +6,7 @@ import BasicEraser from "./shapes/BasicEraser";
 import BasicLine from "./shapes/BasicLine";
 import BasicRectangle from "./shapes/BasicRectangle";
 
-const ShapeFactory = ({shapes}: {shapes: Shape[]}) => {
+const ShapeFactory = ({ shapes }: { shapes: Shape[] }) => {
 	return (
 		<>
 			{shapes.map((shape) => {

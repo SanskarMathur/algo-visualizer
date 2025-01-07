@@ -14,7 +14,7 @@ import {
 	ZoomOut,
 } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import BasicShapes from "../components/BasicShapeEnum";
+import { BasicShapes } from "../components/ShapeEnum";
 import { changeZoom, resetZoom } from "../redux/canvasSlice";
 import { changeTool, PaintState, redo, undo } from "../redux/paintSlice";
 import "./ToolBar.css";

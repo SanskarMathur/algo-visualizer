@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Layer, Stage } from "react-konva";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import BasicShapes from "../components/BasicShapeEnum";
+import { BasicShapes } from "../components/ShapeEnum";
 import Shape from "../components/Shape";
 import ShapeFactory from "../components/ShapeFactory";
 import BasicArray from "../components/shapes/BasicArray";
