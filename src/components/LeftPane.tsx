@@ -1,17 +1,15 @@
 import { List } from "react-bootstrap-icons";
 import { Controller, useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleLeftPane } from "../redux/canvasSlice";
 import "./LeftPane.css";
 import { AdvancedShapes } from "./ShapeEnum";
 
 const LeftPane = () => {
 	const { register, control, handleSubmit } = useForm();
+	const tool = useSelector((state) => state.canvas.tool);
 	const dispatch = useDispatch();
 
-	const selectedShape = AdvancedShapes.Tree;
-
-	// Reusable input field component
 	const InputField = ({ label, placeholder, name }) => (
 		<div className="input-group">
 			<p className="input-label">{label}</p>
@@ -30,7 +28,6 @@ const LeftPane = () => {
 		</div>
 	);
 
-	// Display shape-specific properties dynamically
 	const displayShapeProperties = (shape) => {
 		switch (shape) {
 			case AdvancedShapes.Array:
@@ -162,7 +159,7 @@ const LeftPane = () => {
 			<div className="leftPane">
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<InputField label="Name" placeholder="Enter shape name" name="shapeName" />
-					{displayShapeProperties(selectedShape)}
+					{displayShapeProperties(tool)}
 				</form>
 			</div>
 		</div>

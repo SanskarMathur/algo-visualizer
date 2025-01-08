@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
 	ArrowClockwise,
 	ArrowCounterclockwise,
@@ -14,87 +15,73 @@ import {
 	ZoomOut,
 } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
+import MoreShapesModal from "../components/MoreShapesModal";
 import { BasicShapes } from "../components/ShapeEnum";
 import { changeZoom, resetZoom } from "../redux/canvasSlice";
-import { changeTool, PaintState, redo, undo } from "../redux/paintSlice";
+import { changeTool, redo, undo } from "../redux/paintSlice";
 import "./ToolBar.css";
 
 const ToolBar = () => {
-	const activeTool = useSelector((state: PaintState) => state.paint.tool || BasicShapes.Move);
-	const canvasScale = useSelector((state: CanvasState) => state.canvas.scale);
+	const [show, setShow] = useState(false);
+	const activeTool = useSelector((state) => state.paint.tool || BasicShapes.Move);
+	const canvasScale = useSelector((state) => state.canvas.scale);
 	const dispatch = useDispatch();
 
-	const changeToolHelper = (newTool: BasicShapes) => {
-		dispatch(changeTool(newTool));
-	};
+	const tools = [
+		{ shape: BasicShapes.Move, icon: <ArrowsMove />, label: "Move" },
+		{ shape: BasicShapes.Selection, icon: <HandIndexThumb />, label: "Selection" },
+		{ shape: BasicShapes.Line, icon: <SlashLg />, label: "Line" },
+		{ shape: BasicShapes.Arrow, icon: <ArrowUpRight />, label: "Arrow" },
+		{ shape: BasicShapes.Circle, icon: <Circle />, label: "Circle" },
+		{ shape: BasicShapes.Rectangle, icon: <Square />, label: "Rectangle" },
+		{ shape: BasicShapes.Scribble, icon: <Pencil />, label: "Scribble" },
+		{ shape: BasicShapes.Eraser, icon: <Eraser />, label: "Eraser" },
+	];
 
 	return (
 		<>
+			<MoreShapesModal show={show} onClose={() => setShow(false)} />
 			<div className="basic-shape-container left">
-				<div className="basic-shape" onClick={() => dispatch(undo())}>
+				<div className="basic-shape" onClick={() => dispatch(undo())} aria-label="Undo">
 					<ArrowCounterclockwise />
 				</div>
-				<div className="basic-shape" onClick={() => dispatch(redo())}>
+				<div className="basic-shape" onClick={() => dispatch(redo())} aria-label="Redo">
 					<ArrowClockwise />
 				</div>
 			</div>
+
 			<div className="basic-shape-container middle">
-				<div
-					className={`basic-shape ${activeTool === BasicShapes.Move ? "active" : ""}`}
-					onClick={() => changeToolHelper(BasicShapes.Move)}>
-					<ArrowsMove />
-				</div>
-				<div
-					className={`basic-shape ${
-						activeTool === BasicShapes.Selection ? "active" : ""
-					}`}
-					onClick={() => changeToolHelper(BasicShapes.Selection)}>
-					<HandIndexThumb />
-				</div>
-				<div
-					className={`basic-shape ${activeTool === BasicShapes.Line ? "active" : ""}`}
-					onClick={() => changeToolHelper(BasicShapes.Line)}>
-					<SlashLg />
-				</div>
-				<div
-					className={`basic-shape ${activeTool === BasicShapes.Arrow ? "active" : ""}`}
-					onClick={() => changeToolHelper(BasicShapes.Arrow)}>
-					<ArrowUpRight />
-				</div>
-				<div
-					className={`basic-shape ${activeTool === BasicShapes.Circle ? "active" : ""}`}
-					onClick={() => changeToolHelper(BasicShapes.Circle)}>
-					<Circle />
-				</div>
-				<div
-					className={`basic-shape ${
-						activeTool === BasicShapes.Rectangle ? "active" : ""
-					}`}
-					onClick={() => changeToolHelper(BasicShapes.Rectangle)}>
-					<Square />
-				</div>
-				<div
-					className={`basic-shape ${activeTool === BasicShapes.Scribble ? "active" : ""}`}
-					onClick={() => changeToolHelper(BasicShapes.Scribble)}>
-					<Pencil />
-				</div>
-				<div
-					className={`basic-shape ${activeTool === BasicShapes.Eraser ? "active" : ""}`}
-					onClick={() => changeToolHelper(BasicShapes.Eraser)}>
-					<Eraser />
-				</div>
-				<div className={`basic-shape`}>
+				{tools.map((tool) => (
+					<div
+						key={tool.shape}
+						className={`basic-shape ${activeTool === tool.shape ? "active" : ""}`}
+						onClick={() => dispatch(changeTool(tool.shape))}
+						aria-label={tool.label}>
+						{tool.icon}
+					</div>
+				))}
+				<div className="basic-shape" aria-label="More Shapes" onClick={() => setShow(true)}>
 					<PlusCircle />
 				</div>
 			</div>
+
 			<div className="basic-shape-container right">
-				<div className="basic-shape" onClick={() => dispatch(changeZoom("out"))}>
+				<div
+					className="basic-shape"
+					onClick={() => dispatch(changeZoom("out"))}
+					aria-label="Zoom Out">
 					<ZoomOut />
 				</div>
-				<div className="basic-shape" onClick={() => dispatch(resetZoom())}>
+				<div
+					className="basic-shape zoom-display"
+					onClick={() => dispatch(resetZoom())}
+					aria-label="Reset Zoom">
 					{Math.round(canvasScale * 100)} %
 				</div>
-				<div className="basic-shape" onClick={() => dispatch(changeZoom("in"))}>
+				<div
+					className="basic-shape"
+					onClick={() => dispatch(changeZoom("in"))}
+					aria-label="Zoom In">
 					<ZoomIn />
 				</div>
 			</div>

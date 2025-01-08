@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BasicShapes } from "../components/ShapeEnum";
+import { AdvancedShapes, BasicShapes } from "../components/ShapeEnum";
 import Shape from "../components/Shape";
 
 export interface PaintState {
-	tool: BasicShapes;
+	tool: BasicShapes | AdvancedShapes;
 	shapesOnCanvas: Shape[];
 	history: Shape[][];
 	future: Shape[][];
@@ -20,7 +20,7 @@ export const paintSlice = createSlice({
 	name: "paint",
 	initialState,
 	reducers: {
-		changeTool: (state, action: PayloadAction<BasicShapes>) => {
+		changeTool: (state, action: PayloadAction<BasicShapes | AdvancedShapes>) => {
 			state.tool = action.payload;
 		},
 		appendShape: (state, action: PayloadAction<Shape>) => {
