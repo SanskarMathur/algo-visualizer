@@ -1,9 +1,9 @@
 import { List } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { BasicShapes } from "../components/ShapeEnum";
+import { AdvancedShapes, BasicShapes } from "../components/ShapeEnum";
 import useKeyboardShortcuts from "../components/useKeyboardShortcuts";
 import { changeZoom, toggleLeftPane } from "../redux/canvasSlice";
-import { changeTool, redo, undo } from "../redux/paintSlice";
+import { changeTool, PaintState, redo, undo } from "../redux/paintSlice";
 import Canvas from "./Canvas";
 import "./CanvasPage.css";
 import LeftPane from "./LeftPane";
@@ -11,6 +11,7 @@ import ToolBar from "./ToolBar";
 
 const CanvasPage = () => {
 	const leftPaneOpen = useSelector((state) => state.canvas.leftPaneOpen);
+	const activeTool = useSelector((state: PaintState) => state.paint.tool);
 	const dispatch = useDispatch();
 
 	// Tool selection shortcuts
@@ -35,7 +36,14 @@ const CanvasPage = () => {
 			{leftPaneOpen ? (
 				<LeftPane />
 			) : (
-				<List className="list-icon-closed" onClick={() => dispatch(toggleLeftPane(true))} />
+				<List
+					className="list-icon-closed"
+					onClick={() => {
+						dispatch(toggleLeftPane(true));
+						if (!(activeTool in AdvancedShapes))
+							dispatch(changeTool(AdvancedShapes.Array));
+					}}
+				/>
 			)}
 			<ToolBar />
 			<Canvas />
