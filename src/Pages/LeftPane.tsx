@@ -1,13 +1,14 @@
 import { List } from "react-bootstrap-icons";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { AdvancedShapes } from "../components/ShapeEnum";
 import { toggleLeftPane } from "../redux/canvasSlice";
 import "./LeftPane.css";
-import { AdvancedShapes } from "./ShapeEnum";
+import { changeTool } from "../redux/paintSlice";
 
 const LeftPane = () => {
 	const { register, control, handleSubmit } = useForm();
-	const tool = useSelector((state) => state.canvas.tool);
+	const tool = useSelector((state) => state.paint.tool);
 	const dispatch = useDispatch();
 
 	const InputField = ({ label, placeholder, name }) => (
@@ -28,7 +29,7 @@ const LeftPane = () => {
 		</div>
 	);
 
-	const displayShapeProperties = (shape) => {
+	const displayShapeProperties = (shape: AdvancedShapes) => {
 		switch (shape) {
 			case AdvancedShapes.Array:
 				return (
@@ -150,17 +151,27 @@ const LeftPane = () => {
 
 	return (
 		<div className="leftPane-container">
-			<div
-				className="list-icon-opened"
-				onClick={() => dispatch(toggleLeftPane())}
-				aria-label="Close left pane">
-				<List />
-			</div>
 			<div className="leftPane">
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<div className="leftPane-div">
+					{Object.values(AdvancedShapes).map((shape) => (
+						<button
+							key={shape}
+							className={`shape-button ${tool === shape ? "active" : ""}`}
+							onClick={() => dispatch(changeTool(shape))}>
+							{shape}
+						</button>
+					))}
+				</div>
+				<form onSubmit={handleSubmit(onSubmit)} className="leftPane-form">
 					<InputField label="Name" placeholder="Enter shape name" name="shapeName" />
 					{displayShapeProperties(tool)}
 				</form>
+			</div>
+			<div
+				className="list-icon-opened"
+				onClick={() => dispatch(toggleLeftPane(false))}
+				aria-label="Close left pane">
+				<List />
 			</div>
 		</div>
 	);
