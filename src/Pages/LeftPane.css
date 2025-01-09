@@ -41,6 +41,7 @@
 	align-items: center;
 	width: 30%;
 	border-right: 1px solid #ccc;
+	background-color: #f9f9f9;
 }
 
 /* Shape button styling */
@@ -49,11 +50,11 @@
 	height: 50px;
 	border: none;
 	border-radius: 10px;
-	background-color: #f9f9f9;
 	cursor: pointer;
 	font-size: 14px;
 	font-weight: bold;
 	color: #333;
+	background-color: #f9f9f9;
 	transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -62,7 +63,6 @@
 }
 
 .shape-button.active {
-	background-color: #cce7ff;
 	background-color: rgb(238, 130, 238, 0.4);
 	color: rgb(126, 0, 126);
 }
@@ -99,7 +99,8 @@
 }
 
 .input-text:focus {
-	border-color: #4a90e2;
+	border-color: rgb(238, 130, 238, 0.7);
+	background-color: rgb(238, 130, 238, 0.1);
 	outline: none;
 }
 
