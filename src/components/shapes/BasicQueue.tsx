@@ -1,30 +1,36 @@
 import { Arrow, Rect, Text } from "react-konva";
+import Shape from "../Shape";
 
-const QueueShape = ({ x, y, elements }) => {
-	const rectHeight = 40;
-	const rectWidth = 60;
-
+const QueueShape = ({
+	stroke,
+	strokeWidth,
+	fill,
+	isDraggable,
+	rotation,
+	properties,
+	elements,
+}: Shape) => {
 	return (
 		<>
-			{elements.map((el, index) => (
+			{elements?.values.map((el: any, index: number) => (
 				<Rect
 					key={index}
-					x={x + index * rectWidth}
-					y={y}
-					width={rectWidth}
-					height={rectHeight}
-					fill="#FFB830"
-					stroke="black"
-					strokeWidth={2}
+					x={properties.x + index * properties.width}
+					y={properties.y}
+					width={properties.width}
+					height={properties.height}
+					fill={fill}
+					stroke={stroke}
+					strokeWidth={strokeWidth}
 				/>
 			))}
-			{elements.map((el, index) => (
+			{elements?.values.map((el, index: number) => (
 				<Text
 					key={`text-${index}`}
-					x={x + index * rectWidth}
-					y={y}
-					width={rectWidth}
-					height={rectHeight}
+					x={properties.x + index * properties.width}
+					y={properties.y}
+					width={properties.width}
+					height={properties.height}
 					text={el}
 					align="center"
 					verticalAlign="middle"
@@ -33,8 +39,8 @@ const QueueShape = ({ x, y, elements }) => {
 				/>
 			))}
 			<Arrow
-				x={x - 50}
-				y={y + rectHeight / 2}
+				x={properties.x - 50}
+				y={properties.y + properties.height / 2}
 				points={[0, 0, 50, 0]}
 				pointerLength={10}
 				pointerWidth={10}
@@ -42,15 +48,15 @@ const QueueShape = ({ x, y, elements }) => {
 				stroke="black"
 			/>
 			<Text
-				x={x - 70}
-				y={y + rectHeight / 2 + 10}
+				x={properties.x - 70}
+				y={properties.y + properties.height / 2 + 10}
 				text="Enqueue"
 				fontSize={14}
 				fill="black"
 			/>
 			<Arrow
-				x={x + elements.length * rectWidth}
-				y={y + rectHeight / 2}
+				x={properties.x + elements.size * properties.width}
+				y={properties.y + properties.height / 2}
 				points={[0, 0, 50, 0]}
 				pointerLength={10}
 				pointerWidth={10}
@@ -58,8 +64,8 @@ const QueueShape = ({ x, y, elements }) => {
 				stroke="black"
 			/>
 			<Text
-				x={x + elements.length * rectWidth + 10}
-				y={y + rectHeight / 2 + 10}
+				x={properties.x + elements.size * properties.width + 10}
+				y={properties.y + properties.height / 2 + 10}
 				text="Dequeue"
 				fontSize={14}
 				fill="black"

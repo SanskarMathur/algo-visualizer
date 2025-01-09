@@ -1,29 +1,35 @@
 import { Rect, Text } from "react-konva";
+import Shape from "../Shape";
 
-const ArrayShape = ({ x, y, elements }) => {
-	const rectHeight = 40;
-	const rectWidth = 60;
-
+const ArrayShape = ({
+	stroke,
+	strokeWidth,
+	fill,
+	isDraggable,
+	rotation,
+	properties,
+	elements,
+}: Shape) => {
 	return (
 		<>
-			{elements.map((el, index: number) => (
+			{elements?.values.map((el: any, index: number) => (
 				<>
 					<Rect
 						key={index}
-						x={x + index * rectWidth}
-						y={y}
-						width={rectWidth}
-						height={rectHeight}
-						fill="#FF6584"
-						stroke="black"
-						strokeWidth={2}
+						x={properties.x + index * properties.width}
+						y={properties.y}
+						width={properties.width}
+						height={properties.height}
+						fill={fill}
+						stroke={stroke}
+						strokeWidth={strokeWidth}
 					/>
 					<Text
 						key={`index-${index}`}
-						x={x + index * rectWidth}
-						y={y - 30}
-						width={rectWidth}
-						height={rectHeight}
+						x={properties.x + index * properties.width}
+						y={properties.y - 30}
+						width={properties.width}
+						height={properties.height}
 						text={index.toString()}
 						align="center"
 						verticalAlign="middle"
@@ -32,10 +38,10 @@ const ArrayShape = ({ x, y, elements }) => {
 					/>
 					<Text
 						key={`text-${index}`}
-						x={x + index * rectWidth}
-						y={y}
-						width={rectWidth}
-						height={rectHeight}
+						x={properties.x + index * properties.width}
+						y={properties.y}
+						width={properties.width}
+						height={properties.height}
 						text={el}
 						align="center"
 						verticalAlign="middle"
