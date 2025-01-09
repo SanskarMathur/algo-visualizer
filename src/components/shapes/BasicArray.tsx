@@ -19,12 +19,12 @@ const ArrayShape = ({ x, y, elements }) => {
 						strokeWidth={2}
 					/>
 					<Text
-						key={`text-${index}`}
+						key={`index-${index}`}
 						x={x + index * rectWidth}
 						y={y - 30}
 						width={rectWidth}
 						height={rectHeight}
-						text={index}
+						text={index.toString()}
 						align="center"
 						verticalAlign="middle"
 						fontSize={12}
