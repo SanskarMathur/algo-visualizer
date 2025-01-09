@@ -4,12 +4,18 @@ import {
 	ArrowsMove,
 	ArrowUpRight,
 	Circle,
+	CircleFill,
 	Eraser,
+	EraserFill,
 	HandIndexThumb,
+	HandIndexThumbFill,
 	Pencil,
+	PencilFill,
 	PlusCircle,
+	PlusCircleFill,
 	SlashLg,
 	Square,
+	SquareFill,
 	ZoomIn,
 	ZoomOut,
 } from "react-bootstrap-icons";
@@ -26,13 +32,34 @@ const ToolBar = () => {
 
 	const tools = [
 		{ shape: BasicShapes.Move, icon: <ArrowsMove />, label: "Move" },
-		{ shape: BasicShapes.Selection, icon: <HandIndexThumb />, label: "Selection" },
+		{
+			shape: BasicShapes.Selection,
+			icon:
+				activeTool === BasicShapes.Selection ? <HandIndexThumbFill /> : <HandIndexThumb />,
+			label: "Selection",
+		},
 		{ shape: BasicShapes.Line, icon: <SlashLg />, label: "Line" },
 		{ shape: BasicShapes.Arrow, icon: <ArrowUpRight />, label: "Arrow" },
-		{ shape: BasicShapes.Circle, icon: <Circle />, label: "Circle" },
-		{ shape: BasicShapes.Rectangle, icon: <Square />, label: "Rectangle" },
-		{ shape: BasicShapes.Scribble, icon: <Pencil />, label: "Scribble" },
-		{ shape: BasicShapes.Eraser, icon: <Eraser />, label: "Eraser" },
+		{
+			shape: BasicShapes.Circle,
+			icon: activeTool === BasicShapes.Circle ? <CircleFill /> : <Circle />,
+			label: "Circle",
+		},
+		{
+			shape: BasicShapes.Rectangle,
+			icon: activeTool === BasicShapes.Rectangle ? <SquareFill /> : <Square />,
+			label: "Rectangle",
+		},
+		{
+			shape: BasicShapes.Scribble,
+			icon: activeTool === BasicShapes.Scribble ? <PencilFill /> : <Pencil />,
+			label: "Scribble",
+		},
+		{
+			shape: BasicShapes.Eraser,
+			icon: activeTool === BasicShapes.Eraser ? <EraserFill /> : <Eraser />,
+			label: "Eraser",
+		},
 	];
 
 	return (
