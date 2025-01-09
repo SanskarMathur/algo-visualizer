@@ -1,10 +1,10 @@
 import { List } from "react-bootstrap-icons";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { AdvancedShapes } from "../components/ShapeEnum";
+import { AdvancedShapes, BasicShapes } from "../components/ShapeEnum";
 import { toggleLeftPane } from "../redux/canvasSlice";
-import "./LeftPane.css";
 import { changeTool } from "../redux/paintSlice";
+import "./LeftPane.css";
 
 const LeftPane = () => {
 	const { register, control, handleSubmit } = useForm();
@@ -169,7 +169,10 @@ const LeftPane = () => {
 			</div>
 			<div
 				className="list-icon-opened"
-				onClick={() => dispatch(toggleLeftPane(false))}
+				onClick={() => {
+					dispatch(toggleLeftPane(false));
+					if (!(tool in BasicShapes)) dispatch(changeTool(BasicShapes.Move));
+				}}
 				aria-label="Close left pane">
 				<List />
 			</div>
