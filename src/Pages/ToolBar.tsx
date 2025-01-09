@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
 	ArrowClockwise,
 	ArrowCounterclockwise,
@@ -15,14 +14,12 @@ import {
 	ZoomOut,
 } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
-import MoreShapesModal from "../components/MoreShapesModal";
 import { BasicShapes } from "../components/ShapeEnum";
-import { changeZoom, resetZoom } from "../redux/canvasSlice";
+import { changeZoom, resetZoom, toggleLeftPane } from "../redux/canvasSlice";
 import { changeTool, redo, undo } from "../redux/paintSlice";
 import "./ToolBar.css";
 
 const ToolBar = () => {
-	const [show, setShow] = useState(false);
 	const activeTool = useSelector((state) => state.paint.tool || BasicShapes.Move);
 	const canvasScale = useSelector((state) => state.canvas.scale);
 	const dispatch = useDispatch();
@@ -40,7 +37,6 @@ const ToolBar = () => {
 
 	return (
 		<>
-			<MoreShapesModal show={show} onClose={() => setShow(false)} />
 			<div className="basic-shape-container left">
 				<div className="basic-shape" onClick={() => dispatch(undo())} aria-label="Undo">
 					<ArrowCounterclockwise />
@@ -60,7 +56,10 @@ const ToolBar = () => {
 						{tool.icon}
 					</div>
 				))}
-				<div className="basic-shape" aria-label="More Shapes" onClick={() => setShow(true)}>
+				<div
+					className="basic-shape"
+					aria-label="More Shapes"
+					onClick={() => dispatch(toggleLeftPane(true))}>
 					<PlusCircle />
 				</div>
 			</div>
