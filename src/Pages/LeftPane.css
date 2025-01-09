@@ -40,7 +40,6 @@
 	flex-direction: column;
 	align-items: center;
 	width: 30%;
-	border-right: 1px solid #ccc;
 	background-color: #f9f9f9;
 }
 
@@ -49,7 +48,7 @@
 	width: 100%;
 	height: 50px;
 	border: none;
-	border-radius: 10px;
+	border-radius: 5px;
 	cursor: pointer;
 	font-size: 14px;
 	font-weight: bold;
