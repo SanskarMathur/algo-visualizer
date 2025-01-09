@@ -165,6 +165,22 @@ const LeftPane = () => {
 				<form onSubmit={handleSubmit(onSubmit)} className="leftPane-form">
 					<InputField label="Name" placeholder="Enter shape name" name="shapeName" />
 					{displayShapeProperties(tool)}
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<div style={{ maxWidth: "40%" }}>
+							<InputField label="X" placeholder="Enter X" name="shapeX" />
+						</div>
+						<div style={{ maxWidth: "40%" }}>
+							<InputField label="Y" placeholder="Enter Y" name="shapeY" />
+						</div>
+					</div>
+					<div style={{ display: "flex", justifyContent: "space-between" }}>
+						<div style={{ maxWidth: "40%" }}>
+							<InputField label="Height" placeholder="Box Height" name="shapeY" />
+						</div>
+						<div style={{ maxWidth: "40%" }}>
+							<InputField label="Width" placeholder="Box Width" name="shapeX" />
+						</div>
+					</div>
 				</form>
 			</div>
 			<div
