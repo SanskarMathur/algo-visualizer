@@ -30,8 +30,8 @@ export const canvasSlice = createSlice({
 		resetZoom: (state) => {
 			state.scale = 1;
 		},
-		toggleLeftPane: (state) => {
-			state.leftPaneOpen = !state.leftPaneOpen;
+		toggleLeftPane: (state, action: PayloadAction<boolean>) => {
+			if (action.payload !== null) state.leftPaneOpen = action.payload;
 		},
 	},
 });
