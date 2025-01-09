@@ -1,12 +1,12 @@
 import { List } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { BasicShapes } from "../components/ShapeEnum";
-import LeftPane from "../components/LeftPane";
 import useKeyboardShortcuts from "../components/useKeyboardShortcuts";
 import { changeZoom, toggleLeftPane } from "../redux/canvasSlice";
 import { changeTool, redo, undo } from "../redux/paintSlice";
 import Canvas from "./Canvas";
 import "./CanvasPage.css";
+import LeftPane from "./LeftPane";
 import ToolBar from "./ToolBar";
 
 const CanvasPage = () => {
@@ -35,7 +35,7 @@ const CanvasPage = () => {
 			{leftPaneOpen ? (
 				<LeftPane />
 			) : (
-				<List className="list-icon-closed" onClick={() => dispatch(toggleLeftPane())} />
+				<List className="list-icon-closed" onClick={() => dispatch(toggleLeftPane(true))} />
 			)}
 			<ToolBar />
 			<Canvas />
