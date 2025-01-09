@@ -110,7 +110,7 @@ const LeftPane = () => {
 					<>
 						<InputField
 							label="Graph Nodes"
-							placeholder="Enter nodes (Comma Separated)"
+							placeholder="Enter Number of nodes"
 							name="graphNodes"
 						/>
 						<InputField
