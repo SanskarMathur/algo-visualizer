@@ -110,23 +110,6 @@ const Canvas = () => {
 			<Layer>
 				{shapesOnCanvas && <ShapeFactory shapes={shapesOnCanvas} />}
 				{newShape && <ShapeFactory shapes={[newShape]} />}
-				<BasicArray x={100} y={100} elements={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-				<BasicQueue x={100} y={200} elements={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-				<BasicLinkedList x={100} y={300} elements={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
-				<BasicMap
-					x={100}
-					y={400}
-					elements={[
-						{ key: "abc", value: 1 },
-						{ key: "bcd", value: 2 },
-						{ key: "cde", value: 3 },
-						{ key: "def", value: 4 },
-						{ key: "efg", value: 10 },
-						{ key: "fgh", value: 20 },
-						{ key: "ghi", value: 30 },
-					]}
-				/>
-				<BasicStack x={1300} y={500} elements={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]} />
 			</Layer>
 		</Stage>
 	);
