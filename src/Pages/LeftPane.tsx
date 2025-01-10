@@ -151,38 +151,37 @@ const LeftPane = () => {
 
 	return (
 		<div className="leftPane-container">
-			<div className="leftPane">
-				<div className="leftPane-div">
-					{Object.values(AdvancedShapes).map((shape) => (
-						<button
-							key={shape}
-							className={`shape-button ${tool === shape ? "active" : ""}`}
-							onClick={() => dispatch(changeTool(shape))}>
-							{shape}
-						</button>
-					))}
-				</div>
-				<form onSubmit={handleSubmit(onSubmit)} className="leftPane-form">
-					<InputField label="Name" placeholder="Enter shape name" name="shapeName" />
-					{displayShapeProperties(tool)}
-					<div style={{ display: "flex", justifyContent: "space-between" }}>
-						<div style={{ maxWidth: "40%" }}>
-							<InputField label="X" placeholder="Enter X" name="shapeX" />
-						</div>
-						<div style={{ maxWidth: "40%" }}>
-							<InputField label="Y" placeholder="Enter Y" name="shapeY" />
-						</div>
-					</div>
-					<div style={{ display: "flex", justifyContent: "space-between" }}>
-						<div style={{ maxWidth: "40%" }}>
-							<InputField label="Height" placeholder="Box Height" name="shapeY" />
-						</div>
-						<div style={{ maxWidth: "40%" }}>
-							<InputField label="Width" placeholder="Box Width" name="shapeX" />
-						</div>
-					</div>
-				</form>
+			<div className="leftPane-div">
+				{Object.values(AdvancedShapes).map((shape) => (
+					<button
+						key={shape}
+						className={`shape-button ${tool === shape ? "active" : ""}`}
+						onClick={() => dispatch(changeTool(shape))}>
+						{shape}
+					</button>
+				))}
 			</div>
+			<form onSubmit={handleSubmit(onSubmit)} className="leftPane-form">
+				<InputField label="Name" placeholder="Enter shape name" name="shapeName" />
+				{displayShapeProperties(tool)}
+				<div style={{ display: "flex", justifyContent: "space-between" }}>
+					<div style={{ maxWidth: "40%" }}>
+						<InputField label="X" placeholder="Enter X" name="shapeX" />
+					</div>
+					<div style={{ maxWidth: "40%" }}>
+						<InputField label="Y" placeholder="Enter Y" name="shapeY" />
+					</div>
+				</div>
+				<div style={{ display: "flex", justifyContent: "space-between" }}>
+					<div style={{ maxWidth: "40%" }}>
+						<InputField label="Height" placeholder="Box Height" name="shapeY" />
+					</div>
+					<div style={{ maxWidth: "40%" }}>
+						<InputField label="Width" placeholder="Box Width" name="shapeX" />
+					</div>
+				</div>
+				<button className="btn">Add to Canvas</button>
+			</form>
 			<div
 				className="list-icon-opened"
 				onClick={() => {
