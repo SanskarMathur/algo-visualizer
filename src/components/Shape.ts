@@ -18,6 +18,8 @@ export interface BasicShapeProps {
 	height?: number;
 	width?: number;
 	radius?: number;
+	radiusX?: number;
+	radiusY?: number;
 	points?: number[];
 	startX?: number;
 	startY?: number;

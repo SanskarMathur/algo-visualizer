@@ -33,7 +33,8 @@ export const createNewShape = (
 				startY: pointerPosition.y,
 				x: pointerPosition.x,
 				y: pointerPosition.y,
-				radius: 0,
+				radiusX: 0,
+				radiusY: 0,
 			};
 			break;
 		case BasicShapes.Line:
@@ -72,11 +73,12 @@ export const updateShapeProperties = (
 		case BasicShapes.Circle:
 			updatedShape.properties.x = (updatedShape.properties.startX + pointerPosition.x) / 2;
 			updatedShape.properties.y = (updatedShape.properties.startY + pointerPosition.y) / 2;
-			updatedShape.properties.radius =
-				Math.max(
-					Math.abs(pointerPosition.x - updatedShape.properties.startX),
-					Math.abs(pointerPosition.y - updatedShape.properties.startY)
-				) / 2;
+			updatedShape.properties.radiusX = Math.abs(
+				pointerPosition.x - updatedShape.properties.startX
+			)/2;
+			updatedShape.properties.radiusY = Math.abs(
+				pointerPosition.y - updatedShape.properties.startY
+			)/2;
 			break;
 		case BasicShapes.Line:
 		case BasicShapes.Arrow:
