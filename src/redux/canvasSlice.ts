@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+const minScale = 0.1;
+const maxScale = 2;
+const zoomStep = 0.1;
+
 export interface CanvasState {
 	position: { x: number; y: number };
 	scale: number;
 	leftPaneOpen: boolean;
 }
 
-const initialState = {
+const initialState: CanvasState = {
 	position: { x: 0, y: 0 },
 	scale: 1,
 	leftPaneOpen: false,
@@ -20,14 +24,18 @@ export const canvasSlice = createSlice({
 			state.position = action.payload;
 		},
 		changeZoom: (state, action: PayloadAction<string>) => {
-			const minScale = 0.1;
-			const maxScale = 2;
-			if (action.payload === "out" && state.scale > minScale)
-				state.scale = Math.max(minScale, state.scale - 0.1);
-			else if (action.payload === "in" && state.scale < maxScale)
-				state.scale = Math.min(maxScale, state.scale + 0.1);
+			if (action.payload === "out" && state.scale > minScale) {
+				state.scale = Math.max(minScale, state.scale - zoomStep);
+				state.position.x += (window.innerWidth / 2) * zoomStep;
+				state.position.y += (window.innerHeight / 2) * zoomStep;
+			} else if (action.payload === "in" && state.scale < maxScale) {
+				state.scale = Math.min(maxScale, state.scale + zoomStep);
+				state.position.x -= (window.innerWidth / 2) * zoomStep;
+				state.position.y -= (window.innerHeight / 2) * zoomStep;
+			}
 		},
 		resetZoom: (state) => {
+			state.position = { x: 0, y: 0 };
 			state.scale = 1;
 		},
 		toggleLeftPane: (state, action: PayloadAction<boolean>) => {

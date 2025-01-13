@@ -2,14 +2,9 @@ import { useEffect, useState } from "react";
 import { Layer, Stage } from "react-konva";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
-import { BasicShapes } from "../components/ShapeEnum";
 import Shape from "../components/Shape";
+import { BasicShapes } from "../components/ShapeEnum";
 import ShapeFactory from "../components/ShapeFactory";
-import BasicArray from "../components/shapes/BasicArray";
-import BasicLinkedList from "../components/shapes/BasicLinkedList";
-import BasicMap from "../components/shapes/BasicMap";
-import BasicQueue from "../components/shapes/BasicQueue";
-import BasicStack from "../components/shapes/BasicStack";
 import { createNewShape, updateShapeProperties } from "../components/ShapeUtils";
 import { changePosition } from "../redux/canvasSlice";
 import { appendShape } from "../redux/paintSlice";
@@ -106,7 +101,9 @@ const Canvas = () => {
 			draggable={tool === BasicShapes.Move}
 			scale={{ x: canvasScale, y: canvasScale }}
 			onDragEnd={handleMouseUp}
-			style={{ backgroundColor: "#faf7f0" }}>
+			style={{ backgroundColor: "#faf7f0" }}
+			x={canvasPosition.x}
+			y={canvasPosition.y}>
 			<Layer>
 				{shapesOnCanvas && <ShapeFactory shapes={shapesOnCanvas} />}
 				{newShape && <ShapeFactory shapes={[newShape]} />}
