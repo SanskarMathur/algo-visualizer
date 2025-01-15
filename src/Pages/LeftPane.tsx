@@ -3,8 +3,10 @@ import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { AdvancedShapes, BasicShapes } from "../components/ShapeEnum";
 import { toggleLeftPane } from "../redux/canvasSlice";
-import { changeTool } from "../redux/paintSlice";
+import { appendShape, changeTool } from "../redux/paintSlice";
+import { v4 as uuidv4 } from "uuid";
 import "./LeftPane.css";
+import { createNewDataStructureShape } from "../components/ShapeUtils";
 
 const LeftPane = () => {
 	const { register, control, handleSubmit } = useForm();
@@ -37,12 +39,12 @@ const LeftPane = () => {
 						<InputField
 							label="Number of Elements"
 							placeholder="Enter shape size"
-							name="arraySize"
+							name="size"
 						/>
 						<InputField
 							label="Elements (Comma Separated)"
 							placeholder="e.g., 1,2,3"
-							name="arrayElements"
+							name="elements"
 						/>
 					</>
 				);
@@ -52,7 +54,7 @@ const LeftPane = () => {
 						<InputField
 							label="Elements (Comma Separated)"
 							placeholder="e.g., 1,2,3"
-							name="stackElements"
+							name="elements"
 						/>
 						<div
 							style={{
@@ -63,7 +65,7 @@ const LeftPane = () => {
 							<InputField
 								label="New Element"
 								placeholder="Enter element to Push"
-								name="elementToPush"
+								name="addElement"
 							/>
 							<button className="btn">Push</button>
 						</div>
@@ -76,7 +78,7 @@ const LeftPane = () => {
 						<InputField
 							label="Elements (Comma Separated)"
 							placeholder="e.g., 1,2,3"
-							name="queueElements"
+							name="elements"
 						/>
 						<div
 							style={{
@@ -87,7 +89,7 @@ const LeftPane = () => {
 							<InputField
 								label="New Element"
 								placeholder="Enter element to Push"
-								name="elementToEnqueue"
+								name="addElement"
 							/>
 							<button className="btn">Enqueue</button>
 						</div>
@@ -101,7 +103,7 @@ const LeftPane = () => {
 						<InputField
 							label="Elements (Comma Separated)"
 							placeholder="e.g., 1,2,3"
-							name="arrayElements"
+							name="elements"
 						/>
 					</>
 				);
@@ -126,17 +128,17 @@ const LeftPane = () => {
 						<InputField
 							label="Number of Rows"
 							placeholder="Enter number of rows"
-							name="matrixRows"
+							name="size"
 						/>
 						<InputField
 							label="Number of Columns"
 							placeholder="Enter number of columns"
-							name="matrixColumns"
+							name="numColumns"
 						/>
 						<InputField
 							label="Elements (Comma Separated)"
 							placeholder="e.g., 1,2,3"
-							name="arrayElements"
+							name="elements"
 						/>
 					</>
 				);
@@ -146,7 +148,21 @@ const LeftPane = () => {
 	};
 
 	const onSubmit = (data) => {
-		console.log("Form Data:", data);
+		const values = data.elements.split(",").map((el) => parseInt(el));
+		dispatch(
+			appendShape(
+				createNewDataStructureShape(
+					tool,
+					uuidv4(),
+					values,
+					parseInt(values.length),
+					parseInt(data.shapeX),
+					parseInt(data.shapeY),
+					parseInt(data.rectHeight),
+					parseInt(data.rectWidth)
+				)
+			)
+		);
 	};
 
 	return (
@@ -174,13 +190,15 @@ const LeftPane = () => {
 				</div>
 				<div style={{ display: "flex", justifyContent: "space-between" }}>
 					<div style={{ maxWidth: "40%" }}>
-						<InputField label="Height" placeholder="Box Height" name="shapeY" />
+						<InputField label="Height" placeholder="Box Height" name="rectHeight" />
 					</div>
 					<div style={{ maxWidth: "40%" }}>
-						<InputField label="Width" placeholder="Box Width" name="shapeX" />
+						<InputField label="Width" placeholder="Box Width" name="rectWidth" />
 					</div>
 				</div>
-				<button className="btn">Add to Canvas</button>
+				<button type="submit" className="btn">
+					Add to Canvas
+				</button>
 			</form>
 			<div
 				className="list-icon-opened"
