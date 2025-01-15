@@ -12,10 +12,10 @@ const QueueShape = ({
 }: Shape) => {
 	return (
 		<>
-			{elements?.values.map((el: any, index: number) => (
+			{elements?.values.map((el, index: number) => (
 				<Rect
 					key={index}
-					x={properties.x + index * properties.width}
+					x={properties.x + index * properties.width!}
 					y={properties.y}
 					width={properties.width}
 					height={properties.height}
@@ -27,7 +27,7 @@ const QueueShape = ({
 			{elements?.values.map((el, index: number) => (
 				<Text
 					key={`text-${index}`}
-					x={properties.x + index * properties.width}
+					x={properties.x + index * properties.width!}
 					y={properties.y}
 					width={properties.width}
 					height={properties.height}
@@ -35,12 +35,12 @@ const QueueShape = ({
 					align="center"
 					verticalAlign="middle"
 					fontSize={16}
-					fill="black"
+					fill="white"
 				/>
 			))}
 			<Arrow
 				x={properties.x - 50}
-				y={properties.y + properties.height / 2}
+				y={properties.y + properties.height! / 2}
 				points={[0, 0, 50, 0]}
 				pointerLength={10}
 				pointerWidth={10}
@@ -49,14 +49,14 @@ const QueueShape = ({
 			/>
 			<Text
 				x={properties.x - 70}
-				y={properties.y + properties.height / 2 + 10}
+				y={properties.y + properties.height! / 2 + 10}
 				text="Enqueue"
 				fontSize={14}
 				fill="black"
 			/>
 			<Arrow
-				x={properties.x + elements.size * properties.width}
-				y={properties.y + properties.height / 2}
+				x={properties.x + elements!.size * properties.width!}
+				y={properties.y + properties.height! / 2}
 				points={[0, 0, 50, 0]}
 				pointerLength={10}
 				pointerWidth={10}
@@ -64,8 +64,8 @@ const QueueShape = ({
 				stroke="black"
 			/>
 			<Text
-				x={properties.x + elements.size * properties.width + 10}
-				y={properties.y + properties.height / 2 + 10}
+				x={properties.x + elements!.size * properties.width! + 10}
+				y={properties.y + properties.height! / 2 + 10}
 				text="Dequeue"
 				fontSize={14}
 				fill="black"
