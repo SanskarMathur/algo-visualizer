@@ -73,12 +73,10 @@ export const updateShapeProperties = (
 		case BasicShapes.Circle:
 			updatedShape.properties.x = (updatedShape.properties.startX + pointerPosition.x) / 2;
 			updatedShape.properties.y = (updatedShape.properties.startY + pointerPosition.y) / 2;
-			updatedShape.properties.radiusX = Math.abs(
-				pointerPosition.x - updatedShape.properties.startX
-			)/2;
-			updatedShape.properties.radiusY = Math.abs(
-				pointerPosition.y - updatedShape.properties.startY
-			)/2;
+			updatedShape.properties.radiusX =
+				Math.abs(pointerPosition.x - updatedShape.properties.startX) / 2;
+			updatedShape.properties.radiusY =
+				Math.abs(pointerPosition.y - updatedShape.properties.startY) / 2;
 			break;
 		case BasicShapes.Line:
 		case BasicShapes.Arrow:
@@ -92,7 +90,7 @@ export const updateShapeProperties = (
 		case BasicShapes.Scribble:
 		case BasicShapes.Eraser:
 			updatedShape.properties.points = [
-				...shape.properties.points!,
+				...shape.properties.points,
 				pointerPosition.x,
 				pointerPosition.y,
 			];
@@ -129,7 +127,7 @@ export const createNewDataStructureShape = (
 		stroke: "black",
 		strokeWidth: 2,
 		rotation: 0,
-		fill: "transparent",
+		fill: "green",
 		isDraggable: false,
 		elements: {
 			values: values.slice(0, size),
@@ -141,6 +139,7 @@ export const createNewDataStructureShape = (
 		case AdvancedShapes.Stack:
 		case AdvancedShapes.Array:
 		case AdvancedShapes.Queue:
+		case AdvancedShapes.LinkedList:
 			baseShape.properties = {
 				x: x,
 				y: y,

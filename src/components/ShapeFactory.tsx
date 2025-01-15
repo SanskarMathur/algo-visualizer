@@ -5,6 +5,7 @@ import BasicArrow from "./shapes/BasicArrow";
 import BasicCircle from "./shapes/BasicCircle";
 import BasicEraser from "./shapes/BasicEraser";
 import BasicLine from "./shapes/BasicLine";
+import LinkedListShape from "./shapes/BasicLinkedList";
 import QueueShape from "./shapes/BasicQueue";
 import BasicRectangle from "./shapes/BasicRectangle";
 import StackShape from "./shapes/BasicStack";
@@ -35,6 +36,8 @@ const ShapeFactory = ({ shapes }: { shapes: Shape[] }) => {
 							return <QueueShape key={shape.id} {...shape} />;
 						case AdvancedShapes.Stack:
 							return <StackShape key={shape.id} {...shape} />;
+						case AdvancedShapes.LinkedList:
+							return <LinkedListShape key={shape.id} {...shape} />;
 					}
 				} else console.error(`Unsupported shape type: ${shape.type}`);
 			})}
