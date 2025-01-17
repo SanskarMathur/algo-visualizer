@@ -16,7 +16,7 @@ const ArrayShape = ({
 				<>
 					<Rect
 						key={index}
-						x={properties.x + index * properties.width}
+						x={properties.x + index * properties.width!}
 						y={properties.y}
 						width={properties.width}
 						height={properties.height}
@@ -26,7 +26,7 @@ const ArrayShape = ({
 					/>
 					<Text
 						key={`index-${index}`}
-						x={properties.x + index * properties.width}
+						x={properties.x + index * properties.width!}
 						y={properties.y - 30}
 						width={properties.width}
 						height={properties.height}
@@ -38,7 +38,7 @@ const ArrayShape = ({
 					/>
 					<Text
 						key={`text-${index}`}
-						x={properties.x + index * properties.width}
+						x={properties.x + index * properties.width!}
 						y={properties.y}
 						width={properties.width}
 						height={properties.height}
